@@ -1,10 +1,10 @@
-const Joi = require("joi");
-const mongoose = require("mongoose");
+import Joi from "joi";
+import mongoose from "mongoose";
 
-const Product = mongoose.model(
+export const Product = mongoose.model(
   "Products",
   new mongoose.Schema({
-    genre: {
+    category: {
       type: String,
       required: true,
     },
@@ -29,10 +29,10 @@ const Product = mongoose.model(
   })
 );
 
-function validateProduct(product) {
+export function validateProduct(product) {
   const schema = {
     title: Joi.string().min(5).max(50).required(),
-    genre: Joi.string().required(),
+    category: Joi.string().required(),
     numberInStock: Joi.number().min(0).required(),
     price: Joi.number().min(0).required(),
   };
@@ -40,5 +40,5 @@ function validateProduct(product) {
   return Joi.validate(product, schema);
 }
 
-exports.Product = Product;
-exports.validate = validateProduct;
+// exports.Product = Product;
+// exports.validate = validateProduct;
