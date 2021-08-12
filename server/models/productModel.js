@@ -16,6 +16,7 @@ export const Product = mongoose.model(
       maxlength: 255,
     },
 
+    url: { type: String, required: true },
     numberInStock: {
       type: Number,
       required: true,

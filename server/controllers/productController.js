@@ -16,13 +16,14 @@ export const getProductById = async (req, res) => {
 export const postProduct = async (req, res) => {
   const { error } = validateProduct(req.body);
   if (error) return res.status(400).send(error.details[0].message);
-  const { category, title, numberInStock, price, description } = req.body;
+  const { category, title, numberInStock, price, description, url } = req.body;
   const item = new Product({
     category,
     title,
     numberInStock,
     price,
     description,
+    url,
   });
 
   await item.save();
@@ -43,6 +44,7 @@ export const updateProduct = async (req, res) => {
       numberInStock: req.body.numberInStock,
       description: req.body.description,
       price: req.body.price,
+      url: req.body.url,
     },
     { new: true }
   );
@@ -51,4 +53,13 @@ export const updateProduct = async (req, res) => {
     return res.status(404).send("The product with the given ID was not found.");
 
   res.send(foundProduct);
+};
+
+export const deleteProduct = async (req, res) => {
+  try {
+    const product = await Product.findByIdAndRemove(req.params.id);
+    res.send(product);
+  } catch (error) {
+    return res.status(404).send("The product with the given ID was not found.");
+  }
 };
