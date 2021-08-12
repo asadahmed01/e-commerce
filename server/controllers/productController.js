@@ -7,8 +7,48 @@ export const getProducts = async (req, res) => {
 
 export const getProductById = async (req, res) => {
   const product = await Product.findById(req.params.id);
+  if (!product)
+    return res.status(404).send("The product with the given ID was not found");
   res.send(product);
 };
-//get product by id
 
-//  if (!mongoose.Types.ObjectId.isValid(req.params.id))
+//add product
+export const postProduct = async (req, res) => {
+  const { error } = validateProduct(req.body);
+  if (error) return res.status(400).send(error.details[0].message);
+  const { category, title, numberInStock, price, description } = req.body;
+  const item = new Product({
+    category,
+    title,
+    numberInStock,
+    price,
+    description,
+  });
+
+  await item.save();
+  res.send(item);
+};
+
+export const updateProduct = async (req, res) => {
+  const { error } = validateProduct(req.body);
+  if (error) return res.status(400).send(error.details[0].message);
+  const product = await Product.findById(req.params.id);
+  //console.log(product);
+  if (!product) return res.status(400).send("Invalid product.");
+  const foundProduct = await Product.findByIdAndUpdate(
+    req.params.id,
+    {
+      category: req.body.category,
+      title: req.body.title,
+      numberInStock: req.body.numberInStock,
+      description: req.body.description,
+      price: req.body.price,
+    },
+    { new: true }
+  );
+
+  if (!foundProduct)
+    return res.status(404).send("The product with the given ID was not found.");
+
+  res.send(foundProduct);
+};

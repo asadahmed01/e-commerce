@@ -26,17 +26,21 @@ export const Product = mongoose.model(
       type: Number,
       required: true,
     },
+    description: {
+      type: String,
+      required: true,
+    },
   })
 );
 
 export function validateProduct(product) {
   const schema = {
-    title: Joi.string().min(5).max(50).required(),
     category: Joi.string().required(),
+    title: Joi.string().min(5).max(50).required(),
     numberInStock: Joi.number().min(0).required(),
     price: Joi.number().min(0).required(),
+    description: Joi.string().required(),
   };
-
   return Joi.validate(product, schema);
 }
 

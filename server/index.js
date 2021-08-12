@@ -13,7 +13,6 @@ app.use(express.static("public"));
 
 //User route
 app.use("/products", productRoutes);
-app.use("/products", productRoutes);
 
 const PORT = process.env.PORT || 5000;
 
