@@ -14,20 +14,27 @@ export const getProductById = async (req, res) => {
 
 //add product
 export const postProduct = async (req, res) => {
-  const { error } = validateProduct(req.body);
-  if (error) return res.status(400).send(error.details[0].message);
-  const { category, title, numberInStock, price, description, url } = req.body;
-  const item = new Product({
-    category,
-    title,
-    numberInStock,
-    price,
-    description,
-    url,
-  });
+  console.log(req.body);
+  //const { error } = validateProduct(req.body);
+  // if (error) return res.status(400).send(error.details[0].message);
 
-  await item.save();
-  res.send(item);
+  try {
+    const { category, title, numberInStock, price, description, url } =
+      req.body;
+    const item = new Product({
+      category,
+      title,
+      numberInStock,
+      price,
+      description,
+      url,
+    });
+
+    await item.save();
+    res.send(item);
+  } catch (error) {
+    res.status(400).send(error.details[0].message);
+  }
 };
 
 export const updateProduct = async (req, res) => {

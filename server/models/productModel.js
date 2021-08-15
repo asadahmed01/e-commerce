@@ -41,6 +41,7 @@ export function validateProduct(product) {
     numberInStock: Joi.number().min(0).required(),
     price: Joi.number().min(0).required(),
     description: Joi.string().required(),
+    url: Joi.string().required,
   };
   return Joi.validate(product, schema);
 }
