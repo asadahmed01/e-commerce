@@ -6,6 +6,7 @@ import {
   loadProducts,
   getAllProducts,
 } from "../store/productSlice";
+import ProductCard from "./ProductCard";
 
 const Home = () => {
   const dispatch = useDispatch();
@@ -15,26 +16,8 @@ const Home = () => {
     dispatch(loadProducts());
   }, []);
   return (
-    <div>
-      {products.map((item) => (
-        <li key={item._id}>{item.category}</li>
-      ))}
-      <button
-        onClick={() =>
-          dispatch(
-            addProduct({
-              category: "shiit",
-              title: "title",
-              price: 12,
-              url: "url",
-              description: "description",
-              numberInStock: 55,
-            })
-          )
-        }
-      >
-        Add Product
-      </button>
+    <div className="m-auto lg:px-48 pt-10 px-8">
+      <ProductCard />
     </div>
   );
 };
