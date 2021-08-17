@@ -51,9 +51,15 @@ const ProductCard = () => {
       <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 md:gap-4 lg:gap-4 gap-4 gap">
         {data.map((item) => (
           <div className="lg:p-3" key={item.id}>
-            <Link to={{ pathname: `product/${item.id}`, query: { item } }}>
+            <Link
+              to={{
+                pathname: `product/${item.id}`,
+
+                state: { item },
+              }}
+            >
               <div className="hover:underline cursor-pointer">
-                <div className="  overflow-hidden">
+                <div className="overflow-hidden">
                   <img
                     src={item.url}
                     className="transform hover:scale-110 transition delay-150 duration-300 ease-in-out"

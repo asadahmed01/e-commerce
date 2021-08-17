@@ -13,7 +13,10 @@ function Navbar() {
         </a>
 
         <div className="flex ml-auto">
-          <a className=" lg:hidden  pt-4 hover:text-gray-600 text-gray-600">
+          <a className=" lg:hidden  pt-4 hover:text-gray-600 text-gray-600 relative">
+            <div class=" absolute bottom-1/2 font-bold left-1/2 rounded-full h-4 w-5 flex items-center justify-center bg-gray-900 text-white">
+              4
+            </div>
             <FaShoppingBag size="25" />
           </a>
 
@@ -52,7 +55,7 @@ function Navbar() {
               href="#"
               className="lg:inline-flex lg:w-auto w-full lg:px-3 pt-5 py-2 rounded text-gray-700 items-center justify-center hover:underline hover:text-black font-semibold"
             >
-              <span>Contact Us</span>
+              <span>Contact</span>
             </a>
           </div>
 
@@ -61,7 +64,7 @@ function Navbar() {
               href="#"
               className="hidden lg:inline-flex lg:w-auto w-full lg:px-3 pt-5 py-2 rounded text-gray-700 items-center justify-center hover:text-gray-500 relative"
             >
-              <div class=" absolute bottom-1/2 font-bold left-1/2 rounded-full h-4 w-5 flex items-center justify-center bg-gray-700 text-white">
+              <div class=" absolute bottom-1/2 font-bold left-1/2 rounded-full h-4 w-5 flex items-center justify-center bg-gray-900 text-white">
                 4
               </div>
               <FaShoppingBag size="25" />
