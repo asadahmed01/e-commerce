@@ -16,7 +16,7 @@ const Home = () => {
     dispatch(loadProducts());
   }, []);
   return (
-    <div className="m-auto lg:px-48 pt-10 px-8">
+    <div className="lg:px-20 pt-10 px-8">
       <ProductCard />
     </div>
   );

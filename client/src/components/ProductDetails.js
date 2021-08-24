@@ -1,11 +1,12 @@
 import React, { useState } from "react";
 import { FaMinus, FaPlus } from "react-icons/fa";
 import Model from "./Model";
+import Thumbnail from "./Thumbnail";
 
 const ProductDetails = (props) => {
   const [openModel, setOpenModel] = useState(false);
   const { state } = props.location;
-  const hideNotification = () => {
+  const addItemToCart = () => {
     if (openModel) {
       setOpenModel(false);
       setTimeout(() => {
@@ -22,26 +23,29 @@ const ProductDetails = (props) => {
         </span>
       )}
       <div className="lg:flex lg:px-28 px-8 pt-5 lg:pt-16 my-5">
-        <div className="lg:w-1/2 lg:pr-5 pb-4">
-          <img src={state.item.url} className="lg:p-5" />
-        </div>
+        {/* <div className="lg:w-1/2 lg:pr-5 pb-4">
+          {/* <img src={state.item.url} className="lg:p-5" /> */}
+
+        {/* </div> */}
+
+        <Thumbnail item={state.item} />
         <div className="lg:w-1/2">
-          <h1 className="text-3xl font-bold tracking-wide">Gucci</h1>
-          <p className="font-semibold mt-6 text-xl font-sans">$250.50</p>
-          <div className="flex mt-5">
-            <button className="border border-black p-2 mr-3 hover:text-gray-500">
-              <FaPlus />
-            </button>
-            <p className="font-bold text-xl">1</p>
-            <button className="border border-black p-2 ml-3 hover:text-gray-500">
-              <FaMinus />
-            </button>
-          </div>
+          <h1 className="text-3xl font-bold tracking-wide">
+            {state.item.name}
+          </h1>
+          <p className="font-semibold mt-6 text-xl font-sans">
+            ${state.item.price}
+          </p>
+
           <button
-            className="border border-black w-full lg:w-1/2 py-3 mt-8 text-sm font-semibold hover:bg-black hover:text-white"
-            onClick={hideNotification}
+            className="border border-black w-full lg:w-3/4 py-3 mt-8 text-sm font-semibold hover:bg-black hover:text-white"
+            onClick={addItemToCart}
           >
             ADD TO CART
+          </button>
+
+          <button className="border border-black w-full lg:w-3/4 py-3 mt-8 text-sm font-semibold bg-gray-700 hover:bg-gray-600 text-white">
+            BUY NOW
           </button>
 
           <p className="text-gray-500 mt-10">

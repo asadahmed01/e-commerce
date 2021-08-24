@@ -6,6 +6,7 @@ import { Provider } from "react-redux";
 import configureStore from "./store/configureStore";
 import Navbar from "./components/Navbar";
 import ProductDetails from "./components/ProductDetails";
+import Cart from "./components/Cart";
 
 const store = configureStore();
 function App() {
@@ -15,6 +16,7 @@ function App() {
         <Navbar />
         <Switch>
           <Route path="/product/:id" component={ProductDetails} />
+          <Route path="/cart" component={Cart} />
           <Route path="/" component={Home} />
         </Switch>
       </BrowserRouter>
