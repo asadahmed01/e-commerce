@@ -1,4 +1,5 @@
 import React from "react";
+import { Link } from "react-router-dom";
 
 const CartSubTotal = () => {
   return (
@@ -11,9 +12,11 @@ const CartSubTotal = () => {
         Taxes and shipping calculated at checkout
       </p>
       <div className="md:text-right text-center pt-10">
-        <button className="border border-black px-8 py-2 font-semibold bg-gray-700 hover:bg-gray-600 text-white w-full md:w-1/4">
-          CHECK OUT
-        </button>
+        <Link to="/checkout">
+          <button className="border border-black px-8 py-2 font-semibold bg-gray-700 hover:bg-gray-600 text-white w-full md:w-1/4">
+            CHECK OUT
+          </button>
+        </Link>
       </div>
     </div>
   );

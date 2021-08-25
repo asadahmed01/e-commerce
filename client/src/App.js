@@ -7,6 +7,7 @@ import configureStore from "./store/configureStore";
 import Navbar from "./components/Navbar";
 import ProductDetails from "./components/ProductDetails";
 import Cart from "./components/Cart";
+import Checkout from "./components/Checkout";
 
 const store = configureStore();
 function App() {
@@ -17,6 +18,7 @@ function App() {
         <Switch>
           <Route path="/product/:id" component={ProductDetails} />
           <Route path="/cart" component={Cart} />
+          <Route path="/checkout" component={Checkout} />
           <Route path="/" component={Home} />
         </Switch>
       </BrowserRouter>
