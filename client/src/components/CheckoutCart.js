@@ -21,7 +21,7 @@ const CheckoutCart = () => {
 
       <div className="flex justify-between pt-5 border-b border-gray-300 pb-5">
         <p>Total</p>
-        <p className="font-bold text-3xl">$195.00</p>
+        <p className="font-bold text-3xl font-mono">$195.00</p>
       </div>
     </div>
   );

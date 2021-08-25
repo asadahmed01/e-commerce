@@ -8,6 +8,8 @@ import Navbar from "./components/Navbar";
 import ProductDetails from "./components/ProductDetails";
 import Cart from "./components/Cart";
 import Checkout from "./components/Checkout";
+import Dashboard from "./components/Dashboard";
+import ProtectedRoute from "./components/ProtectedRoute";
 
 const store = configureStore();
 function App() {
@@ -19,6 +21,7 @@ function App() {
           <Route path="/product/:id" component={ProductDetails} />
           <Route path="/cart" component={Cart} />
           <Route path="/checkout" component={Checkout} />
+          <ProtectedRoute exact path="/dashboard" component={Dashboard} />
           <Route path="/" component={Home} />
         </Switch>
       </BrowserRouter>

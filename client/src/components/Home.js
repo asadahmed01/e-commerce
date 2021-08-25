@@ -17,6 +17,7 @@ const Home = () => {
   }, []);
   return (
     <div className="lg:px-20 pt-10 px-8">
+      <h1 className="text-center font-bold text-3xl py-5">All Products</h1>
       <ProductCard />
     </div>
   );

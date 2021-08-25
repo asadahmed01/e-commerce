@@ -72,7 +72,6 @@ const ProductCard = () => {
         "https://cdn.shopify.com/s/files/1/0260/1061/5830/products/main_backpack_1024x1024@2x.png?v=1583784831",
         "https://cdn.shopify.com/s/files/1/0260/1061/5830/products/cirrus_01_grande_402155b5-3e51-4d06-924c-83cafaf1a44c_1024x1024@2x.jpg?v=1583784855",
         "https://cdn.shopify.com/s/files/1/0260/1061/5830/products/Main_cumulus_olive_1024x1024@2x.png?v=1583784852",
-        "https://cdn.shopify.com/s/files/1/0260/1061/5830/products/main_backpack_1024x1024@2x.png?v=1583784831",
       ],
     },
     {
@@ -80,6 +79,9 @@ const ProductCard = () => {
       name: "Gucci",
       price: 250.5,
       url: "https://cdn.shopify.com/s/files/1/0260/1061/5830/products/Main_cumulus_olive_1024x1024@2x.png?v=1583784852",
+      thumbnails: [
+        "https://cdn.shopify.com/s/files/1/0260/1061/5830/products/Main_cumulus_olive_1024x1024@2x.png?v=1583784852",
+      ],
     },
   ];
   return (
