@@ -12,6 +12,7 @@ import Cart from "./components/Cart";
 import Checkout from "./components/Checkout";
 import Dashboard from "./components/Dashboard";
 import ProtectedRoute from "./components/ProtectedRoute";
+import Admin from "./components/Admin";
 
 const store = configureStore();
 function App() {
@@ -24,6 +25,8 @@ function App() {
           <Route path="/product/:id" component={ProductDetails} />
           <Route path="/cart" component={Cart} />
           <Route path="/checkout" component={Checkout} />
+          <ProtectedRoute exact path="/admin" component={Admin} />
+          <ProtectedRoute exact path="/dashboard/:id" component={Dashboard} />
           <ProtectedRoute exact path="/dashboard" component={Dashboard} />
           <Route path="/" component={Home} />
         </Switch>

@@ -4,7 +4,9 @@ import { useDispatch } from "react-redux";
 import { toast } from "react-toastify";
 import { addProduct } from "../store/productSlice";
 
-const Dashboard = () => {
+const Dashboard = (props) => {
+  //const { state } = props.location;
+  console.log(props.location.state);
   const [postData, setPostData] = useState({
     title: "",
     category: "",
@@ -71,7 +73,11 @@ const Dashboard = () => {
             name="name"
             type="text"
             placeholder="Product Title"
-            value={postData.title}
+            value={
+              props.location.state !== undefined
+                ? props.location.state.item.title
+                : postData.title
+            }
             onChange={(e) =>
               setPostData({ ...postData, title: e.target.value })
             }
