@@ -14,9 +14,17 @@ export const getProductById = async (req, res) => {
 
 //add product
 export const postProduct = async (req, res) => {
+  //console.log(req.body.thumbnails);
   try {
-    const { category, title, numberInStock, price, description, url } =
-      req.body;
+    const {
+      category,
+      title,
+      numberInStock,
+      price,
+      description,
+      url,
+      thumbnails,
+    } = req.body;
     const item = new Product({
       category,
       title,
@@ -25,11 +33,12 @@ export const postProduct = async (req, res) => {
       description,
       url,
     });
-
+    thumbnails.forEach((file) => item.thumbnails.push(file.base64));
+    //item.thumbnails.push(file.base64)
     await item.save();
     res.send(item);
   } catch (error) {
-    res.status(400).send(error.details[0].message);
+    res.status(400).send(error.message);
   }
 };
 

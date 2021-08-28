@@ -2,7 +2,7 @@ import { createSelector, createSlice } from "@reduxjs/toolkit";
 import moment from "moment";
 import { apiCallBegan } from "./apiActionCreator";
 
-const cartSlice = createSlice({
+const productSlice = createSlice({
   name: "products",
   initialState: {
     list: [],
@@ -33,64 +33,16 @@ const cartSlice = createSlice({
         description,
       });
     },
-    addToCart: (products, action) => {
-      const dish = products.list.find(
-        (item) => item._id === action.payload._id
-      );
-
-      if (dish) {
-        return products.list.map((item) =>
-          item._id === action.payload._id
-            ? {
-                ...item,
-                quantity: item.quantity + 1,
-              }
-            : item
-        );
-      } else {
-        products.list.push({
-          ...action.payload,
-          quantity: 1,
-        });
-      }
-    },
-
-    incrementItem: (products, action) => {
-      return products.list.map((item) =>
-        item._id === action.payload._id
-          ? { ...item, quantity: item.quantity + 1 }
-          : item
-      );
-    },
-
-    decrementItem: (products, action) => {
-      return (products = products.list.map((item) =>
-        item._id === action.payload._id
-          ? { ...item, quantity: item.quantity - 1 }
-          : item
-      ));
-    },
-
-    removeItem: (products, action) => {
-      return products.list.filter((item) => item._id !== action.payload);
-    },
-
-    clearCart: () => [],
   },
 });
 
 export const {
-  addToCart,
-  incrementItem,
-  decrementItem,
-  removeItem,
-  clearCart,
   productsReceived,
   productsRequested,
   productsRequestFailed,
   productAdded,
-} = cartSlice.actions;
-export default cartSlice.reducer;
+} = productSlice.actions;
+export default productSlice.reducer;
 
 //Action creators
 export const loadProducts = () => (dispatch, getState) => {

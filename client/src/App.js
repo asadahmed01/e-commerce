@@ -1,6 +1,8 @@
 import React from "react";
 import { Route, Switch, BrowserRouter } from "react-router-dom";
 import "./App.css";
+import { ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 import Home from "./components/Home";
 import { Provider } from "react-redux";
 import configureStore from "./store/configureStore";
@@ -16,6 +18,7 @@ function App() {
   return (
     <Provider store={store}>
       <BrowserRouter>
+        <ToastContainer />
         <Navbar />
         <Switch>
           <Route path="/product/:id" component={ProductDetails} />

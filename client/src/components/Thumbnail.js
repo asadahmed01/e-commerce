@@ -11,7 +11,7 @@ const Thumbnail = ({ item }) => {
   };
   return (
     <div className="lg:w-1/2 lg:pr-5">
-      <img src={curr || item.url} className="" />
+      <img src={curr || item.url} className="w-full" />
 
       <div className="flex lg:p-5 justify-center mt-5">
         {(item.thumbnails || []).map((item, i) => (
@@ -21,8 +21,8 @@ const Thumbnail = ({ item }) => {
             src={item}
             className={
               active === i
-                ? "w-20 lg:w-24 lg:h-24 h-20 p-2 border-2 border-gray-600"
-                : "w-20 lg:w-24 lg:h-24 h-20 p-2"
+                ? "w-20 md:w-24 md:h-24 h-20 p-2 border-2 border-gray-600"
+                : "w-20 md:w-24 md:h-24 h-20 p-2"
             }
             onClick={(e) => handleThumbnail(item, e, i)}
           />

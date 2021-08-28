@@ -1,11 +1,14 @@
 import React, { useState } from "react";
 import { FaMinus, FaPlus } from "react-icons/fa";
+import { useDispatch } from "react-redux";
+import { addToCart } from "../store/cartSlice";
 import Model from "./Model";
 import Thumbnail from "./Thumbnail";
 
 const ProductDetails = (props) => {
   const [openModel, setOpenModel] = useState(false);
   const { state } = props.location;
+  const dispatch = useDispatch();
   const addItemToCart = () => {
     if (openModel) {
       setOpenModel(false);
@@ -13,6 +16,7 @@ const ProductDetails = (props) => {
         setOpenModel(true);
       }, 200);
     } else setOpenModel(true);
+    dispatch(addToCart(state.item));
   };
   return (
     <div>
@@ -23,15 +27,10 @@ const ProductDetails = (props) => {
         </span>
       )}
       <div className="lg:flex lg:px-28 px-8 pt-5 lg:pt-16 my-5">
-        {/* <div className="lg:w-1/2 lg:pr-5 pb-4">
-          {/* <img src={state.item.url} className="lg:p-5" /> */}
-
-        {/* </div> */}
-
         <Thumbnail item={state.item} />
         <div className="lg:w-1/2">
           <h1 className="text-3xl font-bold tracking-wide">
-            {state.item.name}
+            {state.item.title}
           </h1>
           <p className="font-semibold mt-6 text-xl font-sans">
             ${state.item.price}
@@ -48,13 +47,7 @@ const ProductDetails = (props) => {
             BUY NOW
           </button>
 
-          <p className="text-gray-500 mt-10">
-            Light as air. The Cirrus rucksack is encased in cloud-like
-            waterproof nylon and features ample interior and exterior pockets,
-            including built-in phone + battery pockets to stay powered up on the
-            go. Luggage slip and secure passport sleeve make it the perfect
-            travel companion. Adventure away.
-          </p>
+          <p className="text-gray-500 mt-10">{state.item.description}</p>
         </div>
       </div>
     </div>
