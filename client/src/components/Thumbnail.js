@@ -25,6 +25,7 @@ const Thumbnail = ({ item }) => {
                 : "w-20 md:w-24 md:h-24 h-20 p-2"
             }
             onClick={(e) => handleThumbnail(item, e, i)}
+            alt="product image"
           />
         ))}
       </div>

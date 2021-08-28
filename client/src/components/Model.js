@@ -1,7 +1,10 @@
 import React, { useState } from "react";
 import { FaTimes } from "react-icons/fa";
+import { useSelector } from "react-redux";
+import { Link } from "react-router-dom";
 
 const Model = ({ data, isOpen }) => {
+  const products = useSelector((state) => state.entities.cart);
   const { url, name } = data;
   const [open, setOpen] = useState(true);
   //console.log(isOpen);
@@ -29,13 +32,15 @@ const Model = ({ data, isOpen }) => {
           <img src={url} className="w-16 h-16" />
           <p className="font-semibold text-xl">{name}</p>
         </div>
-        <p>Qnty: 2</p>
+        <p>{}</p>
       </div>
       <button className="border border-black w-full my-8 py-2 text-sm font-bold">
-        VIEW CART (0)
+        VIEW CART ({products.length})
       </button>
       <span className="border-b">
-        <p className="underline text-center">Continue shopping</p>
+        <Link to="/">
+          <p className="underline text-center">Continue shopping</p>
+        </Link>
       </span>
     </div>
   );

@@ -1,12 +1,12 @@
 import React from "react";
 import { Link } from "react-router-dom";
 
-const CartSubTotal = () => {
+const CartSubTotal = ({ subtotal }) => {
   return (
     <div className="mx-10 mt-10">
       <div className="flex md:justify-end justify-center font-semibold text-xl">
         <p className="pr-10">Subtotal</p>
-        <p>$250.00</p>
+        <p>${subtotal}</p>
       </div>
       <p className="md:text-right text-center pt-5">
         Taxes and shipping calculated at checkout

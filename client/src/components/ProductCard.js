@@ -19,6 +19,7 @@ const ProductCard = ({ data }) => {
                   <img
                     src={item.url}
                     className="transform hover:scale-110 transition delay-150 duration-300 ease-in-out md:w-60 md:h-60 h-40 w-40"
+                    alt="product image"
                   />
                 </div>
 
