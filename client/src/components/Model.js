@@ -35,7 +35,7 @@ const Model = ({ data, isOpen }) => {
         <p>{}</p>
       </div>
       <button className="border border-black w-full my-8 py-2 text-sm font-bold">
-        VIEW CART ({products.length})
+        <Link to="/cart">VIEW CART ({products.length})</Link>
       </button>
       <span className="border-b">
         <Link to="/">

@@ -6,7 +6,8 @@ import { addProduct } from "../store/productSlice";
 
 const Dashboard = (props) => {
   //const { state } = props.location;
-  console.log(props.location.state);
+  const isEdit = props.location.state !== undefined;
+  console.log(isEdit);
   const [postData, setPostData] = useState({
     title: "",
     category: "",
@@ -73,11 +74,7 @@ const Dashboard = (props) => {
             name="name"
             type="text"
             placeholder="Product Title"
-            value={
-              props.location.state !== undefined
-                ? props.location.state.item.title
-                : postData.title
-            }
+            value={isEdit ? props.location.state.item.title : postData.title}
             onChange={(e) =>
               setPostData({ ...postData, title: e.target.value })
             }
@@ -93,7 +90,9 @@ const Dashboard = (props) => {
             name="category"
             type="text"
             placeholder="Product Category"
-            value={postData.category}
+            value={
+              isEdit ? props.location.state.item.category : postData.category
+            }
             onChange={(e) =>
               setPostData({ ...postData, category: e.target.value })
             }
@@ -109,7 +108,11 @@ const Dashboard = (props) => {
             name="numberInStock"
             type="number"
             placeholder="Number in stock"
-            value={postData.numberInStock}
+            value={
+              isEdit
+                ? props.location.state.item.numberInStock
+                : postData.numberInStock
+            }
             onChange={(e) =>
               setPostData({ ...postData, numberInStock: e.target.value })
             }
@@ -123,7 +126,11 @@ const Dashboard = (props) => {
             name="description"
             type="text"
             placeholder="Product description"
-            value={postData.description}
+            value={
+              isEdit
+                ? props.location.state.item.description
+                : postData.description
+            }
             onChange={(e) =>
               setPostData({ ...postData, description: e.target.value })
             }
@@ -136,19 +143,36 @@ const Dashboard = (props) => {
             name="price"
             type="text"
             placeholder="Price"
-            value={postData.price}
+            value={isEdit ? props.location.state.item.price : postData.price}
             onChange={(e) =>
               setPostData({ ...postData, price: e.target.value })
             }
           />
         </div>
+        {isEdit && (
+          <div className="flex justify-between py-5">
+            {props.location.state.item.thumbnails.map((item, i) => (
+              <img
+                src={item}
+                alt="thumbnail image"
+                key={i}
+                className="h-24 w-24 border border-gray-300"
+              />
+            ))}
+          </div>
+        )}
         <div className="mt-2">
           <label className=" block text-sm text-gray-600">Product image</label>
           <FileBase64
             type="file"
             name="url"
             multiple={false}
-            onDone={({ base64 }) => setPostData({ ...postData, url: base64 })}
+            onDone={({ base64 }) =>
+              setPostData({
+                ...postData,
+                url: base64 || props.location.state.item.url,
+              })
+            }
           />
         </div>
         <div className="inline-block mt-2 w-full pr-1">
@@ -173,7 +197,7 @@ const Dashboard = (props) => {
             className="md:w-1/2 w-full px-4 py-1 text-white font-light tracking-wider bg-gray-900 rounded mt-10"
             type="submit"
           >
-            ADD PRODUCT
+            {isEdit ? "UPDATE PRODUCT" : "ADD PRODUCT"}
           </button>
         </div>
       </form>
