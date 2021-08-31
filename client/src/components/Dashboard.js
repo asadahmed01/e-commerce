@@ -7,7 +7,7 @@ import { addProduct } from "../store/productSlice";
 const Dashboard = (props) => {
   //const { state } = props.location;
   const isEdit = props.location.state !== undefined;
-  console.log(isEdit);
+
   const [postData, setPostData] = useState({
     title: "",
     category: "",

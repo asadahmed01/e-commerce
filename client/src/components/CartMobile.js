@@ -9,7 +9,7 @@ function CartMobile({ data }) {
         <p>PRICE</p>
       </div>
       {data.map((item, i) => (
-        <div className="flex justify-between pt-10">
+        <div className="flex justify-between pt-10" key={i}>
           <div className="flex">
             <img src={item.url} className="w-24 h-24 pr-4" />
             <p>{item.title}</p>

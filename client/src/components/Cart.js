@@ -68,7 +68,7 @@ const Cart = () => {
         <CartMobile data={products} />
       </div>
 
-      <CartSubTotal subtotal={total} />
+      <CartSubTotal subtotal={total} data={products} />
     </div>
   );
 };

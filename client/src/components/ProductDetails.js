@@ -37,10 +37,14 @@ const ProductDetails = (props) => {
           </p>
 
           <button
-            className="border border-black w-full lg:w-3/4 py-3 mt-8 text-sm font-semibold hover:bg-black hover:text-white"
+            className={`border border-black w-full lg:w-3/4 py-3 mt-8 text-sm font-semibold hover:bg-black hover:text-white ${
+              state.item.numberInStock <= 0 &&
+              "bg-yellow-500 text-white hover:bg-yellow-500 cursor-not-allowed"
+            }`}
             onClick={addItemToCart}
+            disabled={state.item.numberInStock <= 0}
           >
-            ADD TO CART
+            {state.item.numberInStock > 0 ? "ADD TO CART" : "OUT OF STOCK"}
           </button>
 
           <button className="border border-black w-full lg:w-3/4 py-3 mt-8 text-sm font-semibold bg-gray-700 hover:bg-gray-600 text-white">

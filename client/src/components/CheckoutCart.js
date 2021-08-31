@@ -1,27 +1,37 @@
 import React from "react";
 
 const CheckoutCart = () => {
+  const items = JSON.parse(localStorage.getItem("cartItems") || "[]");
+  const total = items.reduce(
+    (total, current) => (total += current.price * current.quantity),
+    0
+  );
   return (
     <div className="md:ml-2 md:pl-5 md:border-l border-gray-300 pb-14 h-full">
       <h3 className="pb-5 underline">Order Summary</h3>
-      <div className="flex justify-between p-5 border-b border-gray-200">
-        <div className="flex">
-          <div>
-            <img
-              src="https://cdn.shopify.com/s/files/1/0260/1061/5830/products/Main_cumulus_olive_1024x1024@2x.png?v=1583784852"
-              className="w-20 h-20 mr-4 rounded m-2 border border-gray-400"
-            />
-            <p className="m-2">Qty: 2</p>
+      {items.map((item, i) => (
+        <div
+          className="flex justify-between p-5 border-b border-gray-200"
+          key={i}
+        >
+          <div className="flex">
+            <div>
+              <img
+                src={item.url}
+                className="w-20 h-20 mr-4 rounded m-2 border border-gray-400"
+              />
+              <p className="m-2">Qty: {item.quantity}</p>
+            </div>
+
+            <p>{item.title}</p>
           </div>
 
-          <p>Gucci</p>
+          <p>${item.price}</p>
         </div>
-        <p>$195.20</p>
-      </div>
-
+      ))}
       <div className="flex justify-between pt-5 border-b border-gray-300 pb-5">
         <p>Total</p>
-        <p className="font-bold text-3xl font-mono">$195.00</p>
+        <p className="font-bold text-3xl font-mono">${total}</p>
       </div>
     </div>
   );

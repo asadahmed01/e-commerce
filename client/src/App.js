@@ -13,8 +13,10 @@ import Checkout from "./components/Checkout";
 import Dashboard from "./components/Dashboard";
 import ProtectedRoute from "./components/ProtectedRoute";
 import Admin from "./components/Admin";
+import Payment from "./components/Payment";
 
 const store = configureStore();
+
 function App() {
   return (
     <Provider store={store}>
@@ -24,7 +26,9 @@ function App() {
         <Switch>
           <Route path="/product/:id" component={ProductDetails} />
           <Route path="/cart" component={Cart} />
+
           <Route path="/checkout" component={Checkout} />
+          <Route path="/payment" component={Payment} />
           <ProtectedRoute exact path="/admin" component={Admin} />
           <ProtectedRoute exact path="/dashboard/:id" component={Dashboard} />
           <ProtectedRoute exact path="/dashboard" component={Dashboard} />
