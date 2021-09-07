@@ -18,10 +18,10 @@ export const User = mongoose.model(
       minlength: 5,
     },
     address: {
-      street: { type: String, required: true },
-      city: { type: String, required: true },
-      postalcode: { type: String, required: true },
-      province: { type: String, required: true },
+      street: String,
+      city: String,
+      postalcode: String,
+      province: String,
       country: String,
     },
 
@@ -46,12 +46,6 @@ export function validateUser(user) {
     name: Joi.string().required(),
     email: Joi.string().email().required(),
     password: Joi.string().min(5).required(),
-    address: Joi.object().keys({
-      street: Join.string().required,
-      city: Joi.string().required,
-      postalcode: Join.string().required,
-      province: Joi.string().required,
-    }),
   };
   return Joi.validate(user, schema);
 }

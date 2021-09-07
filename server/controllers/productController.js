@@ -68,8 +68,9 @@ export const updateProduct = async (req, res) => {
 };
 
 export const deleteProduct = async (req, res) => {
+  console.log(req.body.id);
   try {
-    const product = await Product.findByIdAndRemove(req.params.id);
+    // const product = await Product.findByIdAndRemove(req.body.id);
     res.send(product);
   } catch (error) {
     return res.status(404).send("The product with the given ID was not found.");

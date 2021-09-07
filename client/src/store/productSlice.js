@@ -33,6 +33,10 @@ const productSlice = createSlice({
         description,
       });
     },
+
+    productDeleted: (products, action) => {
+      return products.list.filter((item) => item._id !== action.payload);
+    },
   },
 });
 
@@ -41,6 +45,7 @@ export const {
   productsRequested,
   productsRequestFailed,
   productAdded,
+  productDeleted,
 } = productSlice.actions;
 export default productSlice.reducer;
 
@@ -68,6 +73,14 @@ export const addProduct = (product) =>
     data: product,
     onSuccess: productAdded.type,
   });
+export const deleteProduct = (id) =>
+  apiCallBegan({
+    url: "/products/deleteproduct",
+    method: "delete",
+    data: { id },
+    onSuccess: productDeleted.type,
+  });
+
 //selector functions
 export const getAllProducts = createSelector(
   (state) => state.entities.products,

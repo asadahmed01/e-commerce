@@ -22,53 +22,62 @@ const Cart = () => {
           Continue Shopping
         </p>
       </Link>
-      <div className="md:table mt-10 mx-10 hidden  pb-5">
-        <div className="table-row-group ">
-          <div className="table-row">
-            <div className="table-cell w-1/2 border-gray-300 border-b pb-3">
-              PRODUCT
+      {products.length > 0 ? (
+        <div className="md:table mt-10 mx-10 hidden  pb-5">
+          <div className="table-row-group ">
+            <div className="table-row">
+              <div className="table-cell w-1/2 border-gray-300 border-b pb-3">
+                PRODUCT
+              </div>
+              <div className="table-cell w-1/4 border-gray-300 border-b pb-3">
+                PRICE
+              </div>
+              <div className="table-cell w-1/4 border-gray-300 border-b pb-3">
+                QUANTITY
+              </div>
+              <div className="table-cell md:w-1/4  border-gray-300 border-b pb-3">
+                TOTAL
+              </div>
             </div>
-            <div className="table-cell w-1/4 border-gray-300 border-b pb-3">
-              PRICE
-            </div>
-            <div className="table-cell w-1/4 border-gray-300 border-b pb-3">
-              QUANTITY
-            </div>
-            <div className="table-cell md:w-1/4  border-gray-300 border-b pb-3">
-              TOTAL
-            </div>
-          </div>
-          {products.map((product, i) => (
-            <div className="table-row" key={i}>
-              <div className="table-cell pt-5 border-gray-300 border-b pb-3">
-                <div className="flex">
-                  <img
-                    src={product.url}
-                    className="w-24 h-24 pr-4"
-                    alt="product image"
-                  />
-                  <p>{product.title}</p>
+            {products.map((product, i) => (
+              <div className="table-row" key={i}>
+                <div className="table-cell pt-5 border-gray-300 border-b pb-3">
+                  <div className="flex">
+                    <img
+                      src={product.url}
+                      className="w-24 h-24 pr-4"
+                      alt="product image"
+                    />
+                    <p>{product.title}</p>
+                  </div>
+                </div>
+                <div className="table-cell pt-5 border-gray-300 border-b pb-3">
+                  {product.price}
+                </div>
+                <div className="table-cell pt-5 border-gray-300 border-b pb-3">
+                  <CartCounter item={product} qty={product.quantity} />
+                </div>
+
+                <div className="table-cell pt-5 border-gray-300 border-b pb-3">
+                  {product.quantity * product.price}
                 </div>
               </div>
-              <div className="table-cell pt-5 border-gray-300 border-b pb-3">
-                {product.price}
-              </div>
-              <div className="table-cell pt-5 border-gray-300 border-b pb-3">
-                <CartCounter item={product} qty={product.quantity} />
-              </div>
-
-              <div className="table-cell pt-5 border-gray-300 border-b pb-3">
-                {product.quantity * product.price}
-              </div>
-            </div>
-          ))}
+            ))}
+          </div>
         </div>
-      </div>
-      <div className="md:hidden">
-        <CartMobile data={products} />
-      </div>
-
-      <CartSubTotal subtotal={total} data={products} />
+      ) : (
+        <div className="m-auto">
+          <p className="text-center mt-20 text-gray-400 text-3xl">
+            Cart is empty
+          </p>
+        </div>
+      )}
+      {products.length > 0 && (
+        <div className="md:hidden">
+          <CartMobile data={products} />
+        </div>
+      )}
+      {products.length > 0 && <CartSubTotal subtotal={total} data={products} />}
     </div>
   );
 };

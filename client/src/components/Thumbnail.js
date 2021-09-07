@@ -11,7 +11,9 @@ const Thumbnail = ({ item }) => {
   };
   return (
     <div className="lg:w-1/2 lg:pr-5">
-      <img src={curr || item.url} className="w-full" />
+      <div className="">
+        <img src={curr || item.url} className="w-full" />
+      </div>
 
       <div className="flex lg:p-5 justify-center mt-5">
         {(item.thumbnails || []).map((item, i) => (

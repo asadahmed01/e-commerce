@@ -12,23 +12,24 @@ const CartCounter = ({ item, qty }) => {
       <div className="flex mt-5">
         <button
           className="border border-black p-1 mr-3 hover:text-gray-500 rounded"
-          onClick={() => dispatch(incrementItem(item))}
-        >
-          <FaPlus />
-        </button>
-        <p className="font-bold text-xl">{qty}</p>
-        <button
-          className="border border-black p-1 ml-3 hover:text-gray-500 rounded"
           onClick={() => dispatch(decrementItem(item))}
         >
           {qty > 1 ? (
             <FaMinus />
           ) : (
             <FaTrash
-              color="gray"
+              color="orange"
               onClick={() => dispatch(removeItem(item._id))}
             />
           )}
+        </button>
+        <p className="font-bold text-xl">{qty}</p>
+
+        <button
+          className="border border-black p-1 ml-3 hover:text-gray-500 rounded"
+          onClick={() => dispatch(incrementItem(item))}
+        >
+          <FaPlus />
         </button>
       </div>
     </div>

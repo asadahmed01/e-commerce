@@ -10,14 +10,22 @@ import {
 } from "@stripe/react-stripe-js";
 import { toast } from "react-toastify";
 import { FaSpinner } from "react-icons/fa";
+import { getCurrentUser } from "../utilities";
 
-const Payment = (props) => {
+const Payment = () => {
   const [loading, setloading] = useState(false);
-  const { state } = props.location;
-
+  const items = JSON.parse(localStorage.getItem("cartItems") || "[]");
+  const address = JSON.parse(localStorage.getItem("address"));
+  const user = getCurrentUser();
+  console.log(user);
+  const total = items.reduce(
+    (total, current) => (total += current.price * current.quantity),
+    0
+  );
   const stripe = useStripe();
   const elements = useElements();
   const history = useHistory();
+
   const handleSubmit = async (e) => {
     e.preventDefault();
     setloading(true);
@@ -33,7 +41,10 @@ const Payment = (props) => {
         body: JSON.stringify({
           paymentMethodType: "card",
           currency: "cad",
-          customer: state.customerInfo,
+          user,
+          orders: items,
+          address,
+          amount: total,
         }),
       }
     ).then((r) => r.json());
@@ -85,9 +96,11 @@ const Payment = (props) => {
 
     if (paymentIntent.status === "succeeded") {
       setTimeout(() => {
-        history.push("/");
+        window.location.pathname = "/";
       }, 2000);
     }
+    localStorage.removeItem("cartItems");
+    localStorage.removeItem("address");
     setloading(false);
   };
   return (
@@ -106,11 +119,15 @@ const Payment = (props) => {
       <label>CCV</label>
       <CardCvcElement className="p-5 font-bold border border-indigo-600 hover:shadow-2xl" />
 
-      <div className="text-center">
-        {loading ? <FaSpinner size="30" className="mt-5" /> : ""}
+      <div className="flex justify-center items-center flex-col">
+        {loading ? (
+          <FaSpinner size="40" className="mt-3 animate-spin text-gray-500" />
+        ) : (
+          ""
+        )}
 
-        <button className="lg:px-8 py-2 text-white font-light tracking-wider bg-gray-900 rounded mt-10 text-2xl w-full">
-          Pay Now
+        <button className="lg:px-8 py-2 text-white font-light tracking-wider bg-gray-900 rounded mt-5 text-2xl w-full">
+          Pay Now (${total})
         </button>
       </div>
     </form>

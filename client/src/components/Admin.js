@@ -1,15 +1,22 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
-import { getAllProducts, loadProducts } from "../store/productSlice";
+import {
+  deleteProduct,
+  getAllProducts,
+  loadProducts,
+} from "../store/productSlice";
 
 const Admin = () => {
+  const [products, setproducts] = useState([]);
   const dispatch = useDispatch();
-  const products = useSelector(getAllProducts);
-
+  const p = useSelector(getAllProducts);
   useEffect(() => {
     dispatch(loadProducts());
+
+    setproducts(p);
   }, []);
+
   return (
     <div>
       <div className="text-right py-10 mr-5">
@@ -43,7 +50,10 @@ const Admin = () => {
                 {item.description.substring(0, 50).concat("...")}
               </p>
               <p className="lg:block hidden">{item.numberInStock}</p>
-              <button className="p-2 pt- 5 bg-red-600 lg:mr-2 mr-5 text-xl hover:bg-red-700">
+              <button
+                className="p-2 pt- 5 bg-red-600 lg:mr-2 mr-5 text-xl hover:bg-red-700"
+                onClick={() => dispatch(deleteProduct(item._id))}
+              >
                 Delete
               </button>
 

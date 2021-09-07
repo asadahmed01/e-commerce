@@ -12,7 +12,7 @@ import ProductCard from "./ProductCard";
 const Home = () => {
   const dispatch = useDispatch();
   const products = useSelector(getAllProducts);
-  console.log(products);
+
   useEffect(() => {
     dispatch(loadProducts());
   }, []);

@@ -40,7 +40,7 @@ const Dashboard = (props) => {
     setError("");
     //dispatch a post request to the backend
     const response = dispatch(addProduct(postData));
-    console.log(response);
+
     toast.success("product added to the database", {
       position: "top-center",
       autoClose: 1500,

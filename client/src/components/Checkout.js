@@ -13,22 +13,36 @@ const Checkout = () => {
     province: "",
     postalcode: "",
   });
+  const [error, setError] = useState("");
 
   const handleSubmit = (e) => {
     e.preventDefault();
+    const { name, email, street, city, country, province, postalcode } =
+      customerInfo;
+    if (
+      name === "" ||
+      email === "" ||
+      street === "" ||
+      city === "" ||
+      country === "" ||
+      province === "" ||
+      postalcode === ""
+    )
+      return setError("All fields are required");
+    setError("");
+    localStorage.setItem("address", JSON.stringify(customerInfo));
+    window.location.pathname = "/payment";
   };
   return (
     <div className="mx-10 md:flex mt-20">
       <div className="md:hidden md:w-1/2 w-full">
         <CheckoutCart />
       </div>
-      <form className="md:w-1/2 w-full rounded leading-loose mr-2 mb-10">
-        <p
-          className="text-gray-800 font-medium text-xl py-5"
-          onSubmit={handleSubmit}
-        >
-          Customer information
-        </p>
+      <form
+        className="md:w-1/2 w-full rounded leading-loose mr-2 mb-10"
+        onSubmit={handleSubmit}
+      >
+        <p className="text-gray-800 font-medium text-xl py-5">Shipping Info</p>
         <InputForm
           type="text"
           value={customerInfo.name}
@@ -75,6 +89,19 @@ const Checkout = () => {
             }
           />
         </div>
+
+        <div className="mt-2">
+          <InputForm
+            type="text"
+            value={customerInfo.province}
+            placeholder="Province"
+            label="Province"
+            name="province"
+            onChange={(e) =>
+              setCustomerInfo({ ...customerInfo, province: e.target.value })
+            }
+          />
+        </div>
         <div className="inline-block mt-2 w-1/2 pr-1">
           <InputForm
             type="text"
@@ -99,22 +126,16 @@ const Checkout = () => {
             }
           />
         </div>
-
+        <div>
+          <p className="text-red-600">{error}</p>
+        </div>
         <div className="mt-4">
-          <Link
-            to={{
-              pathname: "/payment",
-
-              state: { customerInfo },
-            }}
+          <button
+            className="md:w-1/2 w-full px-4 py-1 text-white font-light tracking-wider bg-gray-900 rounded mt-5"
+            type="submit"
           >
-            <button
-              className="md:w-1/2 w-full px-4 py-1 text-white font-light tracking-wider bg-gray-900 rounded mt-10"
-              type="submit"
-            >
-              Continue to Payment
-            </button>
-          </Link>
+            Continue to Payment
+          </button>
         </div>
       </form>
 

@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { FaMinus, FaPlus } from "react-icons/fa";
+
 import { useDispatch } from "react-redux";
 import { addToCart } from "../store/cartSlice";
 import Model from "./Model";
@@ -8,6 +8,7 @@ import Thumbnail from "./Thumbnail";
 const ProductDetails = (props) => {
   const [openModel, setOpenModel] = useState(false);
   const { state } = props.location;
+  console.log(state);
   const dispatch = useDispatch();
   const addItemToCart = () => {
     if (openModel) {

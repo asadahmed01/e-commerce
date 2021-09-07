@@ -2,10 +2,13 @@ import React, { useState } from "react";
 import { FaBars, FaShoppingBag, FaTimes } from "react-icons/fa";
 import { useSelector } from "react-redux";
 import { Link } from "react-router-dom";
+import { getCurrentUser } from "../utilities";
 
 function Navbar() {
   const [isOpen, setOpen] = useState(false);
   const products = useSelector((state) => state.entities.cart);
+  const user = getCurrentUser();
+
   return (
     <div>
       <nav class="flex bg-white p-3 flex-wrap border-gray-300 border-b px-5">
@@ -52,18 +55,41 @@ function Navbar() {
                 </span>
               </Link>
             </a>
-            <a
-              href="#"
-              className="lg:inline-flex lg:w-auto w-full py-2 rounded no-underline text-gray-700 items-center justify-center hover:underline hover:text-black font-semibold lg:border-none border-b-2 lg:px-3 pt-5"
-            >
-              <span onClick={() => setOpen(false)}>Login</span>
-            </a>
-            <a
-              href="#"
-              className="lg:inline-flex lg:w-auto w-full py-2 rounded text-gray-700 items-center justify-center hover:underline hover:text-black font-semibold lg:border-none border-b-2 lg:px-3 pt-5"
-            >
-              <span onClick={() => setOpen(false)}>Signup</span>
-            </a>
+            {user ? (
+              <Link
+                to={{
+                  pathname: "/profile",
+
+                  state: { user },
+                }}
+                className="lg:inline-flex lg:w-auto w-full py-2 rounded no-underline text-gray-700 items-center justify-center hover:underline hover:text-black font-semibold lg:border-none border-b-2 lg:px-3 pt-5"
+              >
+                <span onClick={() => setOpen(false)}>{user.name}</span>
+              </Link>
+            ) : (
+              <Link
+                to="/signin"
+                className="lg:inline-flex lg:w-auto w-full py-2 rounded no-underline text-gray-700 items-center justify-center hover:underline hover:text-black font-semibold lg:border-none border-b-2 lg:px-3 pt-5"
+              >
+                <span onClick={() => setOpen(false)}>Login</span>
+              </Link>
+            )}
+            {user ? (
+              <Link
+                to="/logout"
+                className="lg:inline-flex lg:w-auto w-full py-2 rounded text-gray-700 items-center justify-center hover:underline hover:text-black font-semibold lg:border-none border-b-2 lg:px-3 pt-5"
+              >
+                <span onClick={() => setOpen(false)}>Logout</span>
+              </Link>
+            ) : (
+              <Link
+                to="/register"
+                className="lg:inline-flex lg:w-auto w-full py-2 rounded text-gray-700 items-center justify-center hover:underline hover:text-black font-semibold lg:border-none border-b-2 lg:px-3 pt-5"
+              >
+                <span onClick={() => setOpen(false)}>Sign Up</span>
+              </Link>
+            )}
+
             <a
               href="#"
               className="lg:inline-flex lg:w-auto w-full lg:px-3 pt-5 py-2 rounded text-gray-700 items-center justify-center hover:underline hover:text-black font-semibold"
