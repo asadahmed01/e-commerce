@@ -27,7 +27,8 @@ const Login = () => {
 
         setError("");
         localStorage.setItem("token", response.data.jwt);
-        window.location.pathname = "/cart";
+        //window.location.pathname = "/cart";
+        history.push("/cart");
       })
       .catch((error) => {
         console.log(error);

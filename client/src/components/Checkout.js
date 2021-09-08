@@ -1,9 +1,10 @@
 import React, { useState } from "react";
-import { Link } from "react-router-dom";
+import { useHistory } from "react-router-dom";
 import CheckoutCart from "./CheckoutCart";
 import InputForm from "./InputForm";
 
 const Checkout = () => {
+  const history = useHistory();
   const [customerInfo, setCustomerInfo] = useState({
     name: "",
     email: "",
@@ -31,10 +32,11 @@ const Checkout = () => {
       return setError("All fields are required");
     setError("");
     localStorage.setItem("address", JSON.stringify(customerInfo));
-    window.location.pathname = "/payment";
+
+    history.push("/payment");
   };
   return (
-    <div className="mx-10 md:flex mt-20">
+    <div className="mx-10 md:flex mt-20 mb-20">
       <div className="md:hidden md:w-1/2 w-full">
         <CheckoutCart />
       </div>

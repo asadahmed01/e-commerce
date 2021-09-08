@@ -13,7 +13,7 @@ const Cart = () => {
     0
   );
   return (
-    <div className="py-10">
+    <div className="py-10  mb-20">
       <h1 className="text-center pt-8 pb-3 md:text-5xl text-3xl font-bold tracking-wider">
         Your cart
       </h1>

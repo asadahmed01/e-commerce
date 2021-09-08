@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 
 import { useDispatch } from "react-redux";
+import { Link } from "react-router-dom";
 import { addToCart } from "../store/cartSlice";
 import Model from "./Model";
 import Thumbnail from "./Thumbnail";
@@ -20,7 +21,7 @@ const ProductDetails = (props) => {
     dispatch(addToCart(state.item));
   };
   return (
-    <div>
+    <div className="pb-20">
       {openModel && (
         <span className="transform transition-all">
           {" "}
@@ -47,11 +48,11 @@ const ProductDetails = (props) => {
           >
             {state.item.numberInStock > 0 ? "ADD TO CART" : "OUT OF STOCK"}
           </button>
-
-          <button className="border border-black w-full lg:w-3/4 py-3 mt-8 text-sm font-semibold bg-gray-700 hover:bg-gray-600 text-white">
-            BUY NOW
-          </button>
-
+          <Link to="/guestregister">
+            <button className="border border-black w-full lg:w-3/4 py-3 mt-8 text-sm font-semibold bg-gray-700 hover:bg-gray-600 text-white">
+              BUY NOW
+            </button>
+          </Link>
           <p className="text-gray-500 mt-10">{state.item.description}</p>
         </div>
       </div>

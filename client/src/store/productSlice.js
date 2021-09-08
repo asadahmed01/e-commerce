@@ -87,3 +87,8 @@ export const getAllProducts = createSelector(
 
   (products) => products.list
 );
+export const getStatus = createSelector(
+  (state) => state.entities.products,
+
+  (products) => products.loading
+);

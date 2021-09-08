@@ -96,7 +96,8 @@ const Payment = () => {
 
     if (paymentIntent.status === "succeeded") {
       setTimeout(() => {
-        window.location.pathname = "/";
+        //window.location.pathname = "/";
+        history.push("/");
       }, 2000);
     }
     localStorage.removeItem("cartItems");
@@ -105,7 +106,7 @@ const Payment = () => {
   };
   return (
     <form
-      className="mx-auto lg:w-1/2 w-full mt-10 px-4"
+      className="mx-auto lg:w-1/2 w-full mt-10 px-4 pb-20"
       onSubmit={handleSubmit}
     >
       <label>Card Number</label>

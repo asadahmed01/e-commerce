@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 
 const ProductCard = ({ data }) => {
   return (
-    <div>
+    <div className="pb-20">
       <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 md:gap-4 lg:gap-2 gap-4">
         {data.map((item) => (
           <div className="lg:p-3" key={item._id}>

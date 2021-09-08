@@ -1,5 +1,6 @@
 import axios from "axios";
 import React, { useState } from "react";
+import { useHistory } from "react-router";
 import InputForm from "./InputForm";
 
 const Register = () => {
@@ -8,15 +9,11 @@ const Register = () => {
     name: "",
     password: "",
   });
+  const history = useHistory();
   const [error, setError] = useState("");
   const handleSubmit = (e) => {
     e.preventDefault();
-    // const { email, name, password } = signupInfo;
-    // if (email === "" || name === "" || password === "") {
-    //   return setError("all fields are required.");
-    // }
-    // if (password.length < 5)
-    //   return setError("password must be atleast 5 characters long");
+
     //make api call to the server
     axios
       .post(`${process.env.REACT_APP_BASE_URL}/register`, {
@@ -29,7 +26,8 @@ const Register = () => {
         if (response.data.status === 400)
           return setError(response.data.message);
         setError("");
-        window.location.pathname = "/signin";
+
+        history.push("/signin");
       })
       .catch((error) => {
         console.log(error);

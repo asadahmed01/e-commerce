@@ -19,7 +19,7 @@ const Admin = () => {
 
   return (
     <div>
-      <div className="text-right py-10 mr-5">
+      <div className="text-right py-10 mr-5 pb-20">
         <span className="bg-green-600 px-6 pb-2 rounded-full md:mr-10 text-white text-6xl hover:bg-green-700 hover:shadow-2xl">
           <Link to="/dashboard">+</Link>
         </span>
@@ -28,7 +28,7 @@ const Admin = () => {
       <h1 className="lg:text-center text-left lg:text-3xl text-2xl font-semibold pl-3">
         Edit products
       </h1>
-      <div className="bg-gray-500 text-white p-3 mb-8 lg:mt-12 mt-8">
+      <div className="bg-gray-600 text-white p-3 mb-8 lg:mt-12 mt-8">
         <div className="grid md:grid-cols-7 grid-cols-2 border-gray-300 border-b font-bold">
           <p>IMAGE</p>
           <p>TITLE</p>

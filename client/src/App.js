@@ -21,6 +21,7 @@ import PastOrders from "./components/PastOrders";
 import Profile from "./components/Profile";
 import Logout from "./components/Logout";
 import NotFound from "./components/NotFound";
+import Footer from "./components/Footer";
 const store = configureStore();
 
 function App() {
@@ -47,6 +48,7 @@ function App() {
           <ProtectedRoute exact path="/dashboard" component={Dashboard} />
           <Route path="/" component={Home} />
         </Switch>
+        <Footer />
       </BrowserRouter>
     </Provider>
   );

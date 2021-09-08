@@ -68,5 +68,3 @@ async function seed() {
 
   console.info("Done!");
 }
-
-seed();
