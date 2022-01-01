@@ -13,6 +13,7 @@ const router = express.Router();
 //Home route, get all products
 router.get("/", getProducts);
 router.get("/:id", validateObjectId, getProductById);
+
 router.post("/postproduct", postProduct);
 router.put("/:id", updateProduct);
 router.delete("/deleteproduct", validateObjectId, deleteProduct);

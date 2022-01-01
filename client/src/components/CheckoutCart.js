@@ -1,11 +1,16 @@
 import React from "react";
+import { useSelector } from "react-redux";
 
 const CheckoutCart = () => {
-  const items = JSON.parse(localStorage.getItem("cartItems") || "[]");
+  const savedItems = useSelector((state) => state.entities.cart);
+  //console.log(savedItems);
+  let items = JSON.parse(localStorage.getItem("cartItems") || "[]");
+  if (items.length < 1) items = savedItems;
   const total = items.reduce(
     (total, current) => (total += current.price * current.quantity),
     0
   );
+
   return (
     <div className="md:ml-2 md:pl-5 md:border-l border-gray-300 pb-14 h-full">
       <h3 className="pb-5 underline">Order Summary</h3>

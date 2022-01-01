@@ -64,6 +64,8 @@ export const loadProducts = () => (dispatch, getState) => {
   );
 };
 
+//get past orders
+
 //post to the server
 
 export const addProduct = (product) =>
@@ -73,6 +75,7 @@ export const addProduct = (product) =>
     data: product,
     onSuccess: productAdded.type,
   });
+
 export const deleteProduct = (id) =>
   apiCallBegan({
     url: "/products/deleteproduct",

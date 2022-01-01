@@ -7,6 +7,7 @@ const Logout = () => {
   logout();
 
   history.push("/");
+  window.location.reload();
   return (
     <div className="min-h-screen text-center mt-40 text-3xl">
       {" "}

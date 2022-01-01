@@ -2,3 +2,9 @@
 node_modules
 seed.js
 .DS_Store
+.env
+/node_modules
+npm-debug.log
+.DS_Store
+/*.env
+seed.js

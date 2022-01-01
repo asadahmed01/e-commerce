@@ -11,13 +11,16 @@ import {
 import { toast } from "react-toastify";
 import { FaSpinner } from "react-icons/fa";
 import { getCurrentUser } from "../utilities";
+import { useSelector } from "react-redux";
 
 const Payment = () => {
   const [loading, setloading] = useState(false);
-  const items = JSON.parse(localStorage.getItem("cartItems") || "[]");
+  let items = JSON.parse(localStorage.getItem("cartItems") || "[]");
+  let savedItems = useSelector((state) => state.entities.cart);
+  if (items.length < 1) items = savedItems;
   const address = JSON.parse(localStorage.getItem("address"));
   const user = getCurrentUser();
-  console.log(user);
+
   const total = items.reduce(
     (total, current) => (total += current.price * current.quantity),
     0
@@ -51,7 +54,7 @@ const Payment = () => {
 
     if (backenderror) {
       setloading(false);
-      return toast.warn(`${backenderror.message}`, {
+      return toast.warn("Oops! something went wrong.", {
         position: "top-right",
         autoClose: 5000,
         hideProgressBar: false,
@@ -98,6 +101,7 @@ const Payment = () => {
       setTimeout(() => {
         //window.location.pathname = "/";
         history.push("/");
+        window.location.reload(false);
       }, 2000);
     }
     localStorage.removeItem("cartItems");

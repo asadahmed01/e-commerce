@@ -1,12 +1,38 @@
+import axios from "axios";
 import React from "react";
+import { useState } from "react";
+import { useEffect } from "react";
 import { useDispatch } from "react-redux";
 import { toast } from "react-toastify";
 import { addToCart } from "../store/cartSlice";
+import { getCurrentUser } from "../utilities";
 
 const PastOrders = (props) => {
   //const items = JSON.parse(localStorage.getItem("cartItems") || "[]");
-  const { orders: items } = props.location.state;
+  //const { orders: items } = props.location.state;
+  const [items, setItems] = useState([]);
+  const user = getCurrentUser();
+  console.log(user);
   console.log(props.location.state);
+
+  useEffect(() => {
+    loadPastOrders(user.id);
+  }, []);
+
+  const loadPastOrders = (id) => {
+    axios
+      .get(`${process.env.REACT_APP_BASE_URL}/pastorders/${id}`)
+      .then(function (response) {
+        // handle success
+        setItems(response.data);
+        console.log(response);
+      })
+      .catch(function (error) {
+        // handle error
+        console.log(error);
+      });
+  };
+
   const dispatch = useDispatch();
   const handleReorder = (item) => {
     dispatch(addToCart(item));
@@ -21,7 +47,7 @@ const PastOrders = (props) => {
     });
   };
   return (
-    <div>
+    <div className="h-screen">
       {items.length < 1 ? (
         <p className="text-center mt-20 text-gray-500 text-2xl">
           No orders to show ...
@@ -36,18 +62,18 @@ const PastOrders = (props) => {
               key={i}
               className="flex justify-between items-center hover:bg-green-100 py-1 px-4 border-l-2 border-gray-200 font-semibold text-gray-800"
             >
-              <div className="bg-green-500 rounded-full">
+              <div className="md:bg-green-500 md:rounded-full">
                 <img src={item.url} className="w-16 h-16 rounded-full p-px" />
               </div>
 
-              <p>{item.title}</p>
-              <p>${item.price}</p>
-              <p className="hidden">Qty: {item.quantity}</p>
+              <p className="ml-2">{item.title}</p>
+              <p className="pr-2">${item.price}</p>
+
               <button
-                className="py-2 px-1 text-white tracking-wider bg-green-600 font-semibold rounded-full"
+                className="md:py-2 py-1 px-1 text-white tracking-wider bg-green-600 font-semibold rounded-full"
                 onClick={() => handleReorder(item)}
               >
-                Order Again
+                re-order
               </button>
             </div>
           ))}

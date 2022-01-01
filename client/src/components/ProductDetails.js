@@ -1,16 +1,20 @@
 import React, { useState } from "react";
 
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 import { addToCart } from "../store/cartSlice";
 import Model from "./Model";
 import Thumbnail from "./Thumbnail";
+import { getCurrentUser } from "../utilities";
 
 const ProductDetails = (props) => {
+  const dispatch = useDispatch();
+  const data = [];
   const [openModel, setOpenModel] = useState(false);
   const { state } = props.location;
-  console.log(state);
-  const dispatch = useDispatch();
+  data.push(state.item);
+  const user = getCurrentUser();
+
   const addItemToCart = () => {
     if (openModel) {
       setOpenModel(false);
@@ -19,6 +23,11 @@ const ProductDetails = (props) => {
       }, 200);
     } else setOpenModel(true);
     dispatch(addToCart(state.item));
+  };
+  const buyNow = () => {
+    dispatch(addToCart(state.item));
+    //const tt = useSelector((state) => state.entities.cart);
+    //localStorage.setItem("cartItems", JSON.stringify(data));
   };
   return (
     <div className="pb-20">
@@ -48,8 +57,12 @@ const ProductDetails = (props) => {
           >
             {state.item.numberInStock > 0 ? "ADD TO CART" : "OUT OF STOCK"}
           </button>
-          <Link to="/guestregister">
-            <button className="border border-black w-full lg:w-3/4 py-3 mt-8 text-sm font-semibold bg-gray-700 hover:bg-gray-600 text-white">
+          <Link to={user ? "/checkout" : "/guestregister"}>
+            <button
+              className="border border-black w-full lg:w-3/4 py-3 mt-8 text-sm font-semibold bg-gray-700 hover:bg-gray-600 text-white"
+              disabled={state.item.numberInStock <= 0}
+              onClick={buyNow}
+            >
               BUY NOW
             </button>
           </Link>

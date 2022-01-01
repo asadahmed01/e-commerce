@@ -9,6 +9,14 @@ const stripe = Stripe(process.env.SECRET_KEY, {
   apiVersion: "2020-08-27",
 });
 
+export const getPastOrders = async (req, res) => {
+  const user = await User.findOne({ _id: req.params.id });
+
+  if (!user)
+    return res.json({ msg: "No account with email exists.", status: 400 });
+  else res.send(user.orders);
+};
+
 export const getPublishablekey = (req, res) => {
   res.send({
     publishableKey: process.env.PUBLISH_KEY,
@@ -18,7 +26,8 @@ export const getPublishablekey = (req, res) => {
 export const chargePayment = async (req, res) => {
   const { paymentMethodType, currency, user, amount, address, orders } =
     req.body;
-
+  const newOrder = orders[0];
+  console.log(newOrder);
   // Create a PaymentIntent with the amount, currency, and a payment method type.
 
   try {
@@ -31,19 +40,13 @@ export const chargePayment = async (req, res) => {
     //update the user orders and address.
 
     // Send publishable key and PaymentIntent details to client
+
     if (user) {
-      const foundUser = await User.findOneAndUpdate(
-        { _id: user.id },
-        { $set: { address: address, orders: orders } },
-        { new: true },
-        (err, doc) => {
-          if (err) {
-            console.log("Something wrong when updating data!");
-          } else {
-            console.log("update succeeded");
-          }
-        }
-      );
+      const filter = { _id: user.id };
+      const update = { address: address, $push: { orders: newOrder } };
+      const foundUser = await User.findOneAndUpdate(filter, update, {
+        new: true,
+      });
       foundUser.save();
       res.send({
         clientSecret: paymentIntent.client_secret,
