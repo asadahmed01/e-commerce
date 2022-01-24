@@ -14,14 +14,27 @@ app.use(express.static("public"));
 //User route
 app.use("/products", productRoutes);
 app.use("/users", userRoutes);
-const PORT = process.env.PORT || 5000;
+//const PORT = process.env.PORT || 9000;
+app.listen(process.env.PORT || 9000);
+// mongoose
+//   .connect(process.env.CONNECTION_STRING, {
+//     useNewUrlParser: true,
+//     useUnifiedTopology: true,
+//   })
+//   .then(() => app.listen(PORT, console.log(`server started on port ${PORT}`)))
+//   .catch((error) => error.message);
 
-mongoose
-  .connect(process.env.CONNECTION_STRING, {
+mongoose.connect(
+  process.env.CONNECTION_STRING,
+  {
     useNewUrlParser: true,
     useUnifiedTopology: true,
-  })
-  .then(() => app.listen(PORT, console.log(`server started on port ${PORT}`)))
-  .catch((error) => error.message);
+    //useCreateIndex: true,
+  },
+  (err) => {
+    if (err) throw err;
+    console.log("connected to mongoDB");
+  }
+);
 
-mongoose.set("useFindAndModify", false);
+//mongoose.set("useFindAndModify", false);
